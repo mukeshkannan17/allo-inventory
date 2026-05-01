@@ -21,7 +21,7 @@ interface Reservation {
   };
 }
 
-export default function ReservationPage({ params }: { params: { id: string } }) {
+export default function ReservationPage({ params }: { params: any }) {
   const router = useRouter();
   const [reservation, setReservation] = useState<Reservation | null>(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ export default function ReservationPage({ params }: { params: { id: string } }) 
 
   const fetchReservation = useCallback(async () => {
     try {
-      const res = await fetch(`/api/reservations/${params.id}`);
+      const res = await fetch(`/api/reservations/${use(params).id}`);
       if (!res.ok) {
         setError("Reservation not found");
         return;
