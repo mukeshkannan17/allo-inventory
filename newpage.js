@@ -1,4 +1,5 @@
-"use client";
+const fs = require('fs');
+const content = `"use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -114,4 +115,6 @@ export default function HomePage() {
       </main>
     </div>
   );
-}
+}`;
+fs.writeFileSync('app/page.tsx', content);
+console.log('done! New design written.');
