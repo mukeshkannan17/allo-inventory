@@ -1,10 +1,1 @@
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const reservation = await prisma.reservation.findUnique({ where: { id } });
-  if (!reservation || reservation.status !== "pending") return NextResponse.json({ error: "Gone" }, { status: 410 });
-  if (new Date() > reservation.expiresAt) return NextResponse.json({ error: "Expired" }, { status: 410 });
-  await prisma.$transaction([prisma.reservation.update({ where: { id }, data: { status: "confirmed" } }), prisma.inventory.updateMany({ where: { productId: reservation.productId, warehouseId: reservation.warehouseId }, data: { totalUnits: { decrement: reservation.quantity }, reservedUnits: { decrement: reservation.quantity } } })]);
-  return NextResponse.json({ status: "confirmed" });
-}
+import{NextRequest,NextResponse}from"next/server";import{prisma}from"@/lib/prisma";export async function POST(req:NextRequest,context:{params:Promise<{id:string}>}){const{id}=await context.params;const r=await prisma.reservation.findUnique({where:{id}});if(!r||r.status!=="pending")return NextResponse.json({error:"Gone"},{status:410});if(new Date()>r.expiresAt)return NextResponse.json({error:"Expired"},{status:410});await prisma.$transaction([prisma.reservation.update({where:{id},data:{status:"confirmed"}}),prisma.inventory.updateMany({where:{productId:r.productId,warehouseId:r.warehouseId},data:{totalUnits:{decrement:r.quantity},reservedUnits:{decrement:r.quantity}}})]);return NextResponse.json({status:"confirmed"});}
