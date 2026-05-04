@@ -68,7 +68,7 @@ export default function LoginPage() {
           <div className="border-t border-gray-200 w-full"></div>
           <span className="bg-white px-3 text-xs text-gray-400 absolute">OR</span>
         </div>
-        <button type="button" onClick={() => import("next-auth/react").then(m => m.signIn("google", { callbackUrl: "/" }))}
+        <button type="button" onClick={() => import("next-auth/react").then(m => m.signIn("google", { callbackUrl: "https://allo-inventory-appss.vercel.app/" }))}
           className="w-full border border-gray-300 py-3 rounded-lg font-bold text-gray-700 hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors">
           <img src="https://www.google.com/favicon.ico" width={18} alt="Google" /> Sign in with Google
         </button>
@@ -81,4 +81,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
 
