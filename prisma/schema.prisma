@@ -38,14 +38,25 @@ model Inventory {
   @@unique([productId, warehouseId])
 }
 
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  reservations Reservation[]
+}
+
 model Reservation {
-  id              String   @id @default(cuid())
-  product         Product  @relation(fields: [productId], references: [id])
-  productId       String
-  warehouseId     String
-  quantity        Int
-  status          String   @default("pending")
-  expiresAt       DateTime
-  idempotencyKey  String?  @unique
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  product        Product  @relation(fields: [productId], references: [id])
+  productId      String
+  warehouseId    String
+  quantity       Int
+  status         String   @default("pending")
+  expiresAt      DateTime
+  idempotencyKey String?  @unique
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id])
+  createdAt      DateTime @default(now())
 }
