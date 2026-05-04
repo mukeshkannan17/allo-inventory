@@ -197,7 +197,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-12 py-6">
         <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-400">
-          © 2024 Allo Inventory. All rights reserved.
+          © 2026 Allo Inventory. All rights reserved.
         </div>
       </footer>
     </div>
