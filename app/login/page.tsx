@@ -20,10 +20,7 @@ export default function LoginPage() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || "Login failed");
-        return;
-      }
+      if (!res.ok) { setError(data.error || "Login failed"); return; }
       router.push("/");
       router.refresh();
     } catch {
@@ -63,16 +60,6 @@ export default function LoginPage() {
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-      <div className="mt-4">
-        <div className="relative flex items-center justify-center mb-4">
-          <div className="border-t border-gray-200 w-full"></div>
-          <span className="bg-white px-3 text-xs text-gray-400 absolute">OR</span>
-        </div>
-        <button type="button" onClick={() => import("next-auth/react").then(m => m.signIn("google", { callbackUrl: "https://allo-inventory-appss.vercel.app/" }))}
-          className="w-full border border-gray-300 py-3 rounded-lg font-bold text-gray-700 hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors">
-          <img src="https://www.google.com/favicon.ico" width={18} alt="Google" /> Sign in with Google
-        </button>
-      </div>
         <p className="text-center text-sm text-gray-500 mt-6">
           Don't have an account?{" "}
           <Link href="/signup" className="text-blue-600 font-semibold hover:underline">Sign up</Link>
@@ -81,5 +68,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
