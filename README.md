@@ -4,9 +4,7 @@ A race-condition-free inventory reservation system for multi-warehouse retail br
 
 ## Live Demo
 
-🌐 **https://allo-inventory-appss.vercel.app/login
-
-**
+🌐 **https://allo-inventory-appss.vercel.app/login**
 
 ## GitHub Repository
 
